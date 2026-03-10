@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriMarket - Tableau de bord Vendeur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0fbd1e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            background-color: rgba(15, 189, 30, 0.1);
+            border-left: 4px solid #0fbd1e;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-primary/10 hidden md:flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5 text-white">
+<span class="material-symbols-outlined block">agriculture</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">AgriMarket</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg active-nav text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>Mes annonces</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span>Messages</span>
+<span class="ml-auto bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Transactions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Paramètres</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="Photo de profil du vendeur agriculteur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhqNqrZ50XL5OTX65JmzxKaLYnVMNizlJx-hAPC5VuczFYiR4hSHwQ8GAC43r-5oZdfP32d4CXteu-SamL62TixUYerTQbDTC2QpZtCNm_kNBWvd3D8IxX538rDxihjw1ugf2hVhkdWptxwuIi_Fnar4M9iBS-Be0-RPqqOCgNYwA7buiiK_NTOl63-dh5qU6dxhvCHCDwryeeC8mgFiWddQaKkQrguKaGayXVgOhKwWlFhQHnMA0lw7GtCYhYlKTFUf_2E3AMhetu"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Jean Dupont</p>
+<p class="text-xs text-slate-500 truncate">Vendeur Certifié</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-6 bg-white dark:bg-slate-900 border-b border-primary/10">
+<div class="flex-1 flex items-center gap-4">
+<div class="relative w-full max-w-md hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background-light dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm transition-all" placeholder="Rechercher une annonce, un client..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:bg-primary/10 hover:text-primary rounded-lg relative transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+<span class="text-sm font-semibold">Nouvelle Annonce</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- Welcome Section -->
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Bon retour, Jean !</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Voici ce qu'il se passe sur votre exploitation aujourd'hui.</p>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-lg material-symbols-outlined">campaign</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">+2 ce mois</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Annonces actives</p>
+<p class="text-2xl font-bold mt-1">12</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 bg-purple-50 dark:bg-purple-900/20 text-purple-600 rounded-lg material-symbols-outlined">visibility</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">+15%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Vues totales</p>
+<p class="text-2xl font-bold mt-1">1,280</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 rounded-lg material-symbols-outlined">mail</span>
+<span class="text-xs font-bold text-red-500 bg-red-100 dark:bg-red-900/20 px-2 py-0.5 rounded-full">Urgent</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Messages non lus</p>
+<p class="text-2xl font-bold mt-1">5</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-lg material-symbols-outlined">account_balance_wallet</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">+8%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Revenus (Ventes)</p>
+<p class="text-2xl font-bold mt-1">4,500 €</p>
+</div>
+</div>
+<!-- Recent Ads Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-primary/10 shadow-sm overflow-hidden">
+<div class="p-5 border-b border-primary/10 flex items-center justify-between">
+<h3 class="text-lg font-bold">Mes annonces récentes</h3>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">Voir tout</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase">
+<tr>
+<th class="px-6 py-4">Produit</th>
+<th class="px-6 py-4">Catégorie</th>
+<th class="px-6 py-4">Prix</th>
+<th class="px-6 py-4">Statut</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Tracteur agricole moderne John Deere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1NO21LI7aROSLJCqzD7SlHh45FZ0LDz2liqsHm8eqEx2moWVUoo6mOLREOM97Y1iDUju3MrSqsQfjDF8f8t_s_29VMKQyKhZr2GjVfOZqD3UkoEsSp5ymGqwJ6yk88AV7A_EBZWEbtR_2hS4SJOBJC5foQfxwlUfDoxfhRuU1wNocYUecMooJSzx8NJANe0sJbh-KdVpPXrUd74YFRHBWxWiXwDTY72UDt9ziWEz3ER0D3z4eRHeF-NJvvfd4bHQ4UO7eR6rwwt9G"/>
+</div>
+<div>
+<p class="font-bold text-sm">Tracteur John Deere 6R</p>
+<p class="text-xs text-slate-500">ID: #44920</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Machinerie</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm">45,000 €</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-primary">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                                            En ligne
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors" title="Modifier">
+<span class="material-symbols-outlined text-lg text-slate-500">edit</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors" title="Supprimer">
+<span class="material-symbols-outlined text-lg text-red-500">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Champ de blé doré prêt pour la récolte" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ4YwD7gpAtGCb-kffrd8_JQO3gvUhcmGpgl4Doc8mNBiiQXQ2y_vVVyyQbSauOSkHbPsb7Nq_BLf89VczdAUr11A4efmXJKgseS_CXoORipPGk8jJfWP6fCPauPq5iKfZjM3uuIuvAaVY0NH_g4dQD62GD-X7EP7K2nnOnEEcSDP1jXqP6vHHgn5kiyibCnM0HxaG5YGEMZjwCr99D_EAor4QPU98R_sW5-QOD_bxv48dn3SGHpngTul4b75sTFl7fpG6Rg_EWCkp"/>
+</div>
+<div>
+<p class="font-bold text-sm">Terrain 5 Hectares - Beauce</p>
+<p class="text-xs text-slate-500">ID: #44918</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Terrains</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm">120,000 €</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-slate-400">
+<span class="size-2 rounded-full bg-slate-400"></span>
+                                            Vendu
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors" title="Modifier">
+<span class="material-symbols-outlined text-lg text-slate-500">edit</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors" title="Supprimer">
+<span class="material-symbols-outlined text-lg text-red-500">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Troupeau de moutons dans un pré vert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApx8jCav0bKxXzfYWxYpf9NunqsJ-ygSiD4ZgwpQ6aztyuKzqkBox-DIf1GT3Gd4kRukKcqC3P1geG5LMRWrfHCLsZDxwe_ZkMoMG6EiALrLT4UilcUImvu4i5P3cLao6JtMOcGT0pvdZdwvguDci-IbhohnsrnTwj1NF9Q4FgzHCMeUn1noS9jMrm0wF-4tC5iTg-Fu_TaLjmt56AU7icZ9HkR5HLd5tsIwbBA3S3a4GPArBADWySSxRQuU2EyPIQ2jUA1dpMI0NU"/>
+</div>
+<div>
+<p class="font-bold text-sm">Lot de 20 Agneaux</p>
+<p class="text-xs text-slate-500">ID: #44901</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Élevage</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm">3,200 €</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-orange-500">
+<span class="size-2 rounded-full bg-orange-500"></span>
+                                            En attente
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors" title="Modifier">
+<span class="material-symbols-outlined text-lg text-slate-500">edit</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors" title="Supprimer">
+<span class="material-symbols-outlined text-lg text-red-500">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Bottom Section: Messages and Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Recent Messages -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-primary/10 shadow-sm flex flex-col">
+<div class="p-5 border-b border-primary/10 flex items-center justify-between">
+<h3 class="text-lg font-bold">Derniers messages</h3>
+<button class="text-primary text-sm font-semibold hover:underline">Accéder à la messagerie</button>
+</div>
+<div class="p-2 space-y-1">
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="size-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Avatar client Marc Lefebvre" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRnFREN80Yut8jSr2Y_JK8UpvBQT3jbuVFnzsD0x7E-gf_I6i41m2tHy4deNs8sY-8dh-CVCyRMdbY3iQLUa0JLx-AHKqkHnsA4ik_fMNKdCNNN_qjJgvZKsZRLre5RgpKBvvUU_ogE4pVgLrrpJaqr_6fEjYjyMtlt2qvgBfFUl7u7lBbpEEbs4rgkQmk3HLZxXCEBf2iUq_TYLxKPyFfH-SJu4fP7I_fTVMeOHeSVqoufbAjpe-fY2hrnjP8IevM77qmy69AHs74"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-bold text-sm">Marc Lefebvre</p>
+<span class="text-[10px] text-slate-400 uppercase">Il y a 2h</span>
+</div>
+<p class="text-xs text-slate-500 truncate mt-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-300">"Bonjour, le tracteur John Deere est-il toujours disponible pour une visite ?"</p>
+</div>
+<div class="size-2 bg-primary rounded-full flex-shrink-0"></div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="size-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Avatar client Sophie Martin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdI0U_jK0OdDfr-wCpORTu_122NfHChVhd8gOkKF_I0SypwMXLiqrsP7Iy053WLLHU5wHbcotrzMQc_QBRdGLPnBjKoGRitGbVQyh495Y0TZpAq5o-SIjeBW8B3qRbSqFiXihXiQgTzFvlcq8TqaAG8bjgUu4e25wE1ZbYF54Azi9AC2tWbFdS2YjbUR1PlpQrXXs6vTGwHvKJ_ihsEZPBJh721g4eq0g3qXZJVJ_cDYXvarvonTcEVEIwzQFSuuk_sANrhIMdRjG2"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-bold text-sm">Sophie Martin</p>
+<span class="text-[10px] text-slate-400 uppercase">Hier</span>
+</div>
+<p class="text-xs text-slate-500 truncate mt-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-300">"Merci pour les précisions sur le lot d'agneaux. Je vous tiens au courant."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-primary/10 shadow-sm flex flex-col">
+<div class="p-5 border-b border-primary/10 flex items-center justify-between">
+<h3 class="text-lg font-bold">Activités récentes</h3>
+</div>
+<div class="p-5 space-y-6">
+<div class="flex gap-4">
+<div class="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-lg font-bold">trending_up</span>
+</div>
+<div>
+<p class="text-sm font-medium">Votre annonce <span class="font-bold">Terrain 5 Hectares</span> a atteint 500 vues.</p>
+<p class="text-xs text-slate-400 mt-1">Aujourd'hui, 10:45</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="size-8 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-lg font-bold">shopping_cart</span>
+</div>
+<div>
+<p class="text-sm font-medium">Nouveau paiement reçu pour <span class="font-bold">Location Remorque</span>.</p>
+<p class="text-xs text-slate-400 mt-1">Hier, 16:30</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="size-8 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-lg font-bold">warning</span>
+</div>
+<div>
+<p class="text-sm font-medium">Une annonce arrive à expiration dans 48h.</p>
+<p class="text-xs text-slate-400 mt-1">Il y a 2 jours</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
